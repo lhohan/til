@@ -1,5 +1,5 @@
 +++
-title = "Prefer pathlib over os.path"
+title = "[DEMO] Prefer pathlib over os.path"
 date = 2024-11-10
 [taxonomies]
 topics = ["python"]

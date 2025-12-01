@@ -1,5 +1,5 @@
 +++
-title = "Taxonomies for organizing content"
+title = "[DEMO] Taxonomies for organizing content"
 date = 2024-11-12
 [taxonomies]
 topics = ["zola"]

@@ -12,23 +12,23 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). Built with [
 
 ### Git
 
-- [Git worktrees for parallel branches](content/til/git/worktrees-parallel-branches.md)
-- [Interactive rebase with autosquash](content/til/git/interactive-rebase-autosquash.md)
+- [[DEMO] Git worktrees for parallel branches](content/til/git/demo-worktrees-parallel-branches.md)
+- [[DEMO] Interactive rebase with autosquash](content/til/git/demo-interactive-rebase-autosquash.md)
 
 ### Python
 
-- [Prefer pathlib over os.path](content/til/python/pathlib-over-os-path.md)
-- [The walrus operator for assignment expressions](content/til/python/walrus-operator.md)
+- [[DEMO] Prefer pathlib over os.path](content/til/python/demo-pathlib-over-os-path.md)
+- [[DEMO] The walrus operator for assignment expressions](content/til/python/demo-walrus-operator.md)
 
 ### Rust
 
-- [Auto-reload with cargo-watch](content/til/rust/cargo-watch-reload.md)
-- [Option::map vs Option::and_then](content/til/rust/option-map-vs-and-then.md)
+- [[DEMO] Auto-reload with cargo-watch](content/til/rust/demo-cargo-watch-reload.md)
+- [[DEMO] Option::map vs Option::and_then](content/til/rust/demo-option-map-vs-and-then.md)
 
 ### Zola
 
-- [Shortcodes for reusable embeds](content/til/zola/shortcodes-for-embeds.md)
-- [Taxonomies for organizing content](content/til/zola/taxonomies-for-tags.md)
+- [[DEMO] Shortcodes for reusable embeds](content/til/zola/demo-shortcodes-for-embeds.md)
+- [[DEMO] Taxonomies for organizing content](content/til/zola/demo-taxonomies-for-tags.md)
 <!-- TOC END -->
 
 ## Development

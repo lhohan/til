@@ -1,5 +1,5 @@
 +++
-title = "Auto-reload with cargo-watch"
+title = "[DEMO] Auto-reload with cargo-watch"
 date = 2024-11-25
 [taxonomies]
 topics = ["rust"]

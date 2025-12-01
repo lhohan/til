@@ -1,5 +1,5 @@
 +++
-title = "Shortcodes for reusable embeds"
+title = "[DEMO] Shortcodes for reusable embeds"
 date = 2024-11-22
 [taxonomies]
 topics = ["zola"]

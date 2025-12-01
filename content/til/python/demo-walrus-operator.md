@@ -1,5 +1,5 @@
 +++
-title = "The walrus operator for assignment expressions"
+title = "[DEMO] The walrus operator for assignment expressions"
 date = 2024-11-05
 [taxonomies]
 topics = ["python"]

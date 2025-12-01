@@ -1,5 +1,5 @@
 +++
-title = "Git worktrees for parallel branches"
+title = "[DEMO] Git worktrees for parallel branches"
 date = 2024-11-20
 [taxonomies]
 topics = ["git"]

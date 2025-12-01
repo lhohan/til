@@ -1,5 +1,5 @@
 +++
-title = "Option::map vs Option::and_then"
+title = "[DEMO] Option::map vs Option::and_then"
 date = 2024-11-18
 [taxonomies]
 topics = ["rust"]

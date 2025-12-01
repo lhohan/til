@@ -1,5 +1,5 @@
 +++
-title = "Interactive rebase with autosquash"
+title = "[DEMO] Interactive rebase with autosquash"
 date = 2024-11-15
 [taxonomies]
 topics = ["git"]
