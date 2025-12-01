@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-<main class="container">
+<main class="container home-shell">
     <section class="hero hero--compact">
         <h1>Today I Learned</h1>
         <p class="subline">{{ config.description }}</p>
@@ -26,18 +26,24 @@
     <section class="til-list">
         <h2>Recent TILs</h2>
         {% set til_section = get_section(path="til/_index.md") %} {% for page in
-        til_section.pages | sort(attribute="date") | reverse %}
+        til_section.pages | sort(attribute="date") | reverse %} {% set
+        first_topic = page.taxonomies.topics | first %} {% if first_topic %} {% set
+        first_topic_url = get_taxonomy_url(kind="topics", name=first_topic) %}
+        {% endif %}
         <article class="til-item">
-            <a href="{{ page.permalink }}">
-                <h3>{{ page.title }}</h3>
-            </a>
-            <div class="meta">
-                <time datetime="{{ page.date }}"
-                    >{{ page.date | date(format="%B %d, %Y") }}</time
+            <div class="til-headline">
+                {% if first_topic %}
+                <a class="til-topic-pill" href="{{ first_topic_url }}"
+                    >{{ first_topic }}</a
                 >
-                {% if page.taxonomies.topics %}
-                <span class="topic">{{ page.taxonomies.topics | first }}</span>
                 {% endif %}
+                <a class="til-title" href="{{ page.permalink }}">
+                    {{ page.title }}
+                </a>
+                <time class="til-date"
+                    datetime="{{ page.date | date(format="%Y-%m-%d") }}"
+                    >{{ page.date | date(format="%Y-%m-%d") }}</time
+                >
             </div>
             {% if page.summary %}
             <p>{{ page.summary | safe }}</p>
