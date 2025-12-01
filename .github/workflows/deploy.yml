@@ -4,10 +4,13 @@ on:
   push:
     branches: [main]
     paths:
-      - 'content/til/**'
-      - 'templates/**'
-      - 'static/**'
-      - 'config.toml'
+      - 'git/**'
+      - 'python/**'
+      - 'rust/**'
+      - 'zola/**'
+      - '.work-dir/templates/**'
+      - '.work-dir/static/**'
+      - '.work-dir/config.toml'
 
   workflow_dispatch:
 
@@ -24,7 +27,7 @@ jobs:
           python-version: '3.12'
 
       - name: Update README TOC
-        run: python3 scripts/update-readme.py
+        run: python3 .work-dir/scripts/update-readme.py
 
       - name: Commit README if changed
         run: |
@@ -39,6 +42,7 @@ jobs:
           sudo mv zola /usr/local/bin/
 
       - name: Build site
+        working-directory: .work-dir
         run: zola build
 
       - name: Check required secrets
@@ -58,5 +62,5 @@ jobs:
       - name: Deploy with rsync
         run: |
           rsync -avz --delete \
-            public/ \
+            .work-dir/public/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}

@@ -8,8 +8,8 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-CONTENT_DIR = Path(__file__).parent.parent / "content" / "til"
-README_PATH = Path(__file__).parent.parent / "README.md"
+CONTENT_DIR = Path(__file__).parent.parent.parent
+README_PATH = Path(__file__).parent.parent.parent / "README.md"
 
 TOC_START = "<!-- TOC START -->"
 TOC_END = "<!-- TOC END -->"
@@ -60,9 +60,13 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
     Returns: {topic: [(title, date, relative_path), ...]}
     """
     tils = defaultdict(list)
+    
+    # Only look for topic directories at the root
+    topic_names = ["git", "python", "rust", "zola"]
 
-    for topic_dir in sorted(CONTENT_DIR.iterdir()):
-        if not topic_dir.is_dir() or topic_dir.name.startswith("_"):
+    for topic_name in topic_names:
+        topic_dir = CONTENT_DIR / topic_name
+        if not topic_dir.is_dir():
             continue
 
         ensure_topic_index(topic_dir)
@@ -76,7 +80,7 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
 
             title = fm.get("title", md_file.stem)
             date = fm.get("date", "")
-            rel_path = md_file.relative_to(CONTENT_DIR.parent.parent)
+            rel_path = md_file.relative_to(CONTENT_DIR)
 
             tils[topic].append((title, date, str(rel_path)))
 

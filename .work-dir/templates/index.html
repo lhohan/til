@@ -25,10 +25,15 @@
     </section>
     <section class="til-list">
         <h2>Recent TILs</h2>
-        {% set til_section = get_section(path="til/_index.md") %} {% for page in
-        til_section.pages | sort(attribute="date") | reverse %} {% set
-        first_topic = page.taxonomies.topics | first %} {% if first_topic %} {% set
-        first_topic_url = get_taxonomy_url(kind="topics", name=first_topic) %}
+        {% set topics = get_taxonomy(kind="topics") %}
+        {% set all_pages = [] %}
+        {% for term in topics.items %}
+            {% set_global all_pages = all_pages | concat(with=term.pages) %}
+        {% endfor %}
+        {% for page in all_pages | sort(attribute="date") | reverse %}
+        {% set first_topic = page.taxonomies.topics | first %}
+        {% if first_topic %}
+        {% set first_topic_url = get_taxonomy_url(kind="topics", name=first_topic) %}
         {% endif %}
         <article class="til-item">
             <div class="til-headline">
