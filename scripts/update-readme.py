@@ -5,8 +5,8 @@ Injects TOC between <!-- TOC START --> and <!-- TOC END --> markers.
 """
 
 import re
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
 
 CONTENT_DIR = Path(__file__).parent.parent / "content" / "til"
 README_PATH = Path(__file__).parent.parent / "README.md"
@@ -14,13 +14,36 @@ README_PATH = Path(__file__).parent.parent / "README.md"
 TOC_START = "<!-- TOC START -->"
 TOC_END = "<!-- TOC END -->"
 
+TOPIC_INDEX_TEMPLATE = """+++
+title = "{title}"
+sort_by = "date"
+template = "section.html"
+page_template = "page.html"
+transparent = true
++++\n"""
+
+
+def format_topic_title(name: str) -> str:
+    return name.replace("-", " ").title()
+
+
+def ensure_topic_index(topic_dir: Path) -> bool:
+    index_path = topic_dir / "_index.md"
+    if index_path.exists():
+        return False
+
+    title = format_topic_title(topic_dir.name)
+    index_path.write_text(TOPIC_INDEX_TEMPLATE.format(title=title))
+    print(f"Created _index.md for {title}")
+    return True
+
 
 def extract_frontmatter(content: str) -> dict:
     """Extract TOML frontmatter from markdown file."""
     match = re.match(r"^\+\+\+\s*\n(.*?)\n\+\+\+", content, re.DOTALL)
     if not match:
         return {}
-    
+
     fm = {}
     for line in match.group(1).split("\n"):
         if "=" in line:
@@ -37,25 +60,26 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
     Returns: {topic: [(title, date, relative_path), ...]}
     """
     tils = defaultdict(list)
-    
+
     for topic_dir in sorted(CONTENT_DIR.iterdir()):
         if not topic_dir.is_dir() or topic_dir.name.startswith("_"):
             continue
-        
+
+        ensure_topic_index(topic_dir)
         topic = topic_dir.name
-        
+
         for md_file in sorted(topic_dir.glob("*.md")):
             if md_file.name == "_index.md":
                 continue
             content = md_file.read_text()
             fm = extract_frontmatter(content)
-            
+
             title = fm.get("title", md_file.stem)
             date = fm.get("date", "")
             rel_path = md_file.relative_to(CONTENT_DIR.parent.parent)
-            
+
             tils[topic].append((title, date, str(rel_path)))
-    
+
     return dict(tils)
 
 
@@ -64,12 +88,12 @@ def generate_toc(tils: dict) -> str:
     lines = []
     total = sum(len(items) for items in tils.values())
     lines.append(f"**{total} TILs** across **{len(tils)} topics**\n")
-    
+
     for topic in sorted(tils.keys()):
         lines.append(f"\n### {topic.title()}\n")
         for title, date, path in sorted(tils[topic], key=lambda x: x[1], reverse=True):
             lines.append(f"- [{title}]({path})")
-    
+
     return "\n".join(lines)
 
 
@@ -78,24 +102,23 @@ def update_readme(toc: str) -> bool:
     if not README_PATH.exists():
         print(f"README.md not found at {README_PATH}")
         return False
-    
+
     content = README_PATH.read_text()
-    
+
     if TOC_START not in content or TOC_END not in content:
         print(f"TOC markers not found in README.md")
         return False
-    
+
     pattern = re.compile(
-        rf"({re.escape(TOC_START)})\n.*?\n({re.escape(TOC_END)})",
-        re.DOTALL
+        rf"({re.escape(TOC_START)})\n.*?\n({re.escape(TOC_END)})", re.DOTALL
     )
-    
+
     new_content = pattern.sub(rf"\1\n{toc}\n\2", content)
-    
+
     if new_content == content:
         print("README.md already up to date")
         return False
-    
+
     README_PATH.write_text(new_content)
     print("README.md updated")
     return True
@@ -106,7 +129,7 @@ def main():
     if not tils:
         print("No TILs found")
         return
-    
+
     toc = generate_toc(tils)
     update_readme(toc)
 
