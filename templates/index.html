@@ -7,6 +7,21 @@
     <p class="subline">{{ config.description }}</p>
   </section>
 
+  <section class="section-header">
+    <h2>Topics</h2>
+    <p class="subline">Browse TILs by topic</p>
+  </section>
+
+  <section class="topics-grid">
+    {% set topics = get_taxonomy(kind="topics") %}
+    {% for term in topics.items %}
+    <a href="{{ term.permalink }}" class="topic-card">
+      <h3>{{ term.name }}</h3>
+      <span class="count">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %}</span>
+    </a>
+    {% endfor %}
+  </section>
+
   <section class="til-list">
     <h2>Recent TILs</h2>
     {% set til_section = get_section(path="til/_index.md") %}

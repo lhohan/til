@@ -1,4 +1,4 @@
-base_url = "https://til.example.com"
+base_url = "https://til.hanlho.com"
 title = "Today I Learned"
 description = "A collection of concise write-ups on small things I learn day to day."
 author = "Hans"
