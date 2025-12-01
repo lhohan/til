@@ -1,0 +1,16 @@
+{
+  "name": "Today I Learned",
+  "short_name": "TIL",
+  "description": "A collection of concise write-ups on small things I learn day to day.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F5F2",
+  "theme_color": "#7A1E24",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

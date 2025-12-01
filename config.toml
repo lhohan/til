@@ -1,0 +1,21 @@
+base_url = "https://til.example.com"
+title = "Today I Learned"
+description = "A collection of concise write-ups on small things I learn day to day."
+author = "Hans"
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+[markdown]
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+
+[extra]
+author_name = "Hans"
+github_repo = "https://github.com/hans/til"
+
+[[taxonomies]]
+name = "topics"
+feed = true
+paginate_by = 20

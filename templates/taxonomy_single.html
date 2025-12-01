@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <section class="section-header">
+    <h1>{{ term.name }}</h1>
+    <p class="subline">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %} in this topic</p>
+    <p><a href="{{ get_url(path="/topics") }}">&larr; All topics</a></p>
+  </section>
+
+  <section class="til-list">
+    {% for page in term.pages | sort(attribute="date") | reverse %}
+    <article class="til-item">
+      <a href="{{ page.permalink }}">
+        <h3>{{ page.title }}</h3>
+      </a>
+      <div class="meta">
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+      </div>
+      {% if page.summary %}
+      <p>{{ page.summary | safe }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Topics | {{ config.title }}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <section class="section-header">
+    <h1>Topics</h1>
+    <p class="subline">Browse TILs by topic</p>
+  </section>
+
+  <section class="topics-grid">
+    {% for term in terms %}
+    <a href="{{ term.permalink }}" class="topic-card">
+      <h3>{{ term.name }}</h3>
+      <span class="count">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %}</span>
+    </a>
+    {% endfor %}
+  </section>
+</main>
+{% endblock %}

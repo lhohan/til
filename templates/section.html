@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <section class="section-header">
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}
+    <p class="subline">{{ section.description }}</p>
+    {% endif %}
+  </section>
+
+  <section class="til-list">
+    {% for page in section.pages | sort(attribute="date") | reverse %}
+    <article class="til-item">
+      <a href="{{ page.permalink }}">
+        <h3>{{ page.title }}</h3>
+      </a>
+      <div class="meta">
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+        {% if page.taxonomies.topics %}
+        <span class="topic">{{ page.taxonomies.topics | first }}</span>
+        {% endif %}
+      </div>
+      {% if page.summary %}
+      <p>{{ page.summary | safe }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+</main>
+{% endblock %}
