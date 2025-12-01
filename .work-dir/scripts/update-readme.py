@@ -60,15 +60,12 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
     Returns: {topic: [(title, date, relative_path), ...]}
     """
     tils = defaultdict(list)
-    
-    # Only look for topic directories at the root
-    topic_names = ["git", "python", "rust", "zola"]
 
-    for topic_name in topic_names:
-        topic_dir = CONTENT_DIR / topic_name
-        if not topic_dir.is_dir():
+    for item in sorted(CONTENT_DIR.iterdir()):
+        if not item.is_dir() or item.name.startswith("."):
             continue
 
+        topic_dir = item
         ensure_topic_index(topic_dir)
         topic = topic_dir.name
 
