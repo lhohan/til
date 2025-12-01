@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ config.title }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
-  
+
   <!-- OpenGraph -->
   <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock %}">
   <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock %}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
-  
+
   <!-- Feeds -->
   <link rel="alternate" type="application/atom+xml" title="All TILs" href="{{ get_url(path="/atom.xml") }}">
-  
+
   <!-- PWA -->
   <link rel="manifest" href="{{ get_url(path="/manifest.json") }}">
   <meta name="theme-color" content="#7A1E24">
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="{{ get_url(path="/css/reset.css") }}">
   <link rel="stylesheet" href="{{ get_url(path="/css/styles.css") }}">
@@ -27,10 +27,10 @@
   <header class="site-header">
     <nav class="container nav">
       <a href="{{ get_url(path="/") }}" class="brand">
-        <span class="wordmark">TIL</span>
+        <span class="wordmark">HanLHo TIL</span>
       </a>
       <div class="primary-nav">
-        <a href="{{ get_url(path="/topics") }}">Topics</a>
+        <!--<a href="{{ get_url(path="/topics") }}">Topics</a>-->
         <a href="{{ get_url(path="/atom.xml") }}">RSS</a>
         {% if config.extra.github_repo %}
         <a href="{{ config.extra.github_repo }}" target="_blank" rel="noopener">GitHub</a>
@@ -46,7 +46,6 @@
       <span class="legal">&copy; {{ now() | date(format="%Y") }} {{ config.extra.author_name }}</span>
       <div class="footer-nav">
         <a href="{{ get_url(path="/") }}">Home</a>
-        <a href="{{ get_url(path="/topics") }}">Topics</a>
       </div>
     </div>
   </footer>

@@ -1,9 +1,9 @@
 base_url = "https://til.hanlho.com"
-title = "Today I Learned"
+title = "Hanlho. Today I Learned"
 description = "A collection of concise write-ups on small things I learn day to day."
-author = "Hans"
+author = "Hans L'Hoest"
 compile_sass = false
-build_search_index = false
+build_search_index = true
 generate_feeds = true
 feed_filenames = ["atom.xml"]
 
@@ -12,8 +12,8 @@ highlight_code = true
 highlight_theme = "base16-ocean-dark"
 
 [extra]
-author_name = "Hans"
-github_repo = "https://github.com/hans/til"
+author_name = "Hans L'Hoest"
+github_repo = "https://github.com/lhohan/til"
 
 [[taxonomies]]
 name = "topics"
