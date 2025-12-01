@@ -1,48 +1,49 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <main class="container">
-  <section class="hero">
-    <h1>Today I Learned</h1>
-    <p class="subline">{{ config.description }}</p>
-  </section>
+    <section class="hero hero--compact">
+        <h1>Today I Learned</h1>
+        <p class="subline">{{ config.description }}</p>
 
-  <section class="section-header">
-    <h2>Topics</h2>
-    <p class="subline">Browse TILs by topic</p>
-  </section>
-
-  <section class="topics-grid">
-    {% set topics = get_taxonomy(kind="topics") %}
-    {% for term in topics.items %}
-    <a href="{{ term.permalink }}" class="topic-card">
-      <h3>{{ term.name }}</h3>
-      <span class="count">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %}</span>
-    </a>
-    {% endfor %}
-  </section>
-
-  <section class="til-list">
-    <h2>Recent TILs</h2>
-    {% set til_section = get_section(path="til/_index.md") %}
-    {% for page in til_section.pages | sort(attribute="date") | reverse %}
-    <article class="til-item">
-      <a href="{{ page.permalink }}">
-        <h3>{{ page.title }}</h3>
-      </a>
-      <div class="meta">
-        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
-        {% if page.taxonomies.topics %}
-        <span class="topic">{{ page.taxonomies.topics | first }}</span>
+        {% set topics = get_taxonomy(kind="topics") %} {% if topics.items |
+        length > 0 %}
+        <div class="hero-topics">
+            <span class="hero-topics-label">Browse:</span>
+            <ul class="hero-topics-list">
+                {% for term in topics.items %}
+                <li>
+                    <a href="{{ term.permalink }}">
+                        {{ term.name }}
+                        <span class="hero-topics-count"
+                            >({{ term.pages | length }})</span
+                        >
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
-      </div>
-      {% if page.summary %}
-      <p>{{ page.summary | safe }}</p>
-      {% endif %}
-    </article>
-    {% endfor %}
-  </section>
+    </section>
+    <section class="til-list">
+        <h2>Recent TILs</h2>
+        {% set til_section = get_section(path="til/_index.md") %} {% for page in
+        til_section.pages | sort(attribute="date") | reverse %}
+        <article class="til-item">
+            <a href="{{ page.permalink }}">
+                <h3>{{ page.title }}</h3>
+            </a>
+            <div class="meta">
+                <time datetime="{{ page.date }}"
+                    >{{ page.date | date(format="%B %d, %Y") }}</time
+                >
+                {% if page.taxonomies.topics %}
+                <span class="topic">{{ page.taxonomies.topics | first }}</span>
+                {% endif %}
+            </div>
+            {% if page.summary %}
+            <p>{{ page.summary | safe }}</p>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </section>
 </main>
 {% endblock %}
-
-

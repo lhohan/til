@@ -96,6 +96,35 @@ ul, ol { margin: 0 0 var(--space-4); }
   color: var(--color-slate-700);
   max-width: 60ch;
 }
+.hero.hero--compact {
+  padding: var(--space-8) 0 var(--space-4);
+}
+
+.hero-topics {
+  margin-top: var(--space-3);
+  font-size: 14px;
+  color: var(--color-slate-700);
+}
+.hero-topics-label {
+  margin-right: var(--space-2);
+  font-weight: 500;
+}
+.hero-topics-list {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hero-topics-list li {
+  display: inline;
+}
+.hero-topics-list li + li::before {
+  content: " · ";
+  color: var(--color-slate-300);
+}
+.hero-topics-count {
+  color: var(--color-slate-700);
+}
 
 /* TIL List */
 .til-list h2 {
