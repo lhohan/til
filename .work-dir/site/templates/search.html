@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main class="container home-shell search-shell">
+<main class="container home-shell search-shell" data-pagefind-ignore>
     <section class="search-page">
         <h1>Search</h1>
         <p class="search-summary">
@@ -154,8 +154,8 @@
 
         function extractTopic(data) {
             // Try to extract topic from URL
-            // URL format: /topics/{topic}/{slug}/
-            const match = data.url.match(/\/topics\/([^\/]+)\//);
+            // URL format: /{topic}/{slug}/
+            const match = data.url.match(/^\/([^\/]+)\/[^\/]+\/?$/);
             if (match) {
                 return match[1];
             }
