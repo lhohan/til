@@ -2,11 +2,15 @@
 
 {% block title %}{{ term.name }} | {{ config.title }}{% endblock %}
 
+{% block head_extra %}
+<link rel="alternate" type="application/atom+xml" title="{{ term.name }} TILs" href="{{ get_url(path=term.path ~ "/atom.xml") }}">
+{% endblock %}
+
 {% block content %}
 <main class="container home-shell" data-pagefind-ignore>
   <section class="section-header">
     <h1>{{ term.name }}</h1>
-    <p class="subline">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %} in this topic</p>
+    <p class="subline">{{ term.pages | length }} TIL{% if term.pages | length != 1 %}s{% endif %} in this topic · <a href="{{ get_url(path=term.path ~ "/atom.xml") }}">RSS</a></p>
     <p><a href="{{ get_url(path="/topics") }}">&larr; All topics</a></p>
   </section>
 
