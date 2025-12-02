@@ -1,7 +1,8 @@
-# Build output
-.work-dir/public/
+# Build artifacts
+.work-dir/site/public/
 
 # Nix
+.envrc
 .direnv/
 result
 
@@ -15,3 +16,7 @@ result
 # OS
 .DS_Store
 Thumbs.db
+
+## LLMs
+.claude/settings.local.json
+**/.factory/

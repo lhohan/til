@@ -1,16 +1,16 @@
 set shell := ["bash", "-uc"]
 
-dev:
-    cd .work-dir && zola serve --drafts
+dev: update-readme
+    cd .work-dir/site && zola serve --drafts
 
-build:
-    cd .work-dir && zola build
+build: update-readme
+    cd .work-dir/site && zola build
 
 check:
-    cd .work-dir && zola check
+    cd .work-dir/site && zola check
 
 update-readme:
     python3 .work-dir/scripts/update-readme.py
 
 clean:
-    rm -rf .work-dir/public/
+    rm -rf .work-dir/site/public/

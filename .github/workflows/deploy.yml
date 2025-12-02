@@ -8,9 +8,9 @@ on:
       - 'python/**'
       - 'rust/**'
       - 'zola/**'
-      - '.work-dir/templates/**'
-      - '.work-dir/static/**'
-      - '.work-dir/config.toml'
+      - '.work-dir/site/templates/**'
+      - '.work-dir/site/static/**'
+      - '.work-dir/site/config.toml'
 
   workflow_dispatch:
 
@@ -42,7 +42,7 @@ jobs:
           sudo mv zola /usr/local/bin/
 
       - name: Build site
-        working-directory: .work-dir
+        working-directory: .work-dir/site
         run: zola build
 
       - name: Check required secrets
@@ -62,5 +62,5 @@ jobs:
       - name: Deploy with rsync
         run: |
           rsync -avz --delete \
-            .work-dir/public/ \
+            .work-dir/site/public/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
