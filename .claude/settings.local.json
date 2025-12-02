@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(just update-readme:*)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
