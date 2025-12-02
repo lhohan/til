@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container home-shell search-shell">
+    <section class="search-page">
+        <h1>Search</h1>
+        <p class="search-summary">
+            Showing results for <span id="search-query">all entries</span>
+        </p>
+        <section class="til-list" id="search-results">
+            <!-- Results will be dynamically inserted here -->
+        </section>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ get_url(path="/pagefind/pagefind.js") }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const resultsContainer = document.getElementById("search-results");
+            const queryLabel = document.getElementById("search-query");
+
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get("q") || "";
+
+            // Update query display
+            if (queryLabel) {
+                queryLabel.textContent = query ? `"${query}"` : "all entries";
+            }
+
+            // Show loading state
+            if (query) {
+                showLoadingState(resultsContainer);
+            } else {
+                showEmptyState(resultsContainer, "");
+                return;
+            }
+
+            try {
+                // Initialize Pagefind
+                const pagefind = await import("{{ get_url(path="/pagefind/pagefind.js") }}");
+
+                // Perform search
+                const results = await pagefind.search(query);
+
+                // Clear loading state
+                resultsContainer.innerHTML = "";
+
+                if (results.results.length === 0) {
+                    showEmptyState(resultsContainer, query);
+                    return;
+                }
+
+                // Render results
+                await renderResults(results.results, resultsContainer);
+            } catch (error) {
+                console.error("Search error:", error);
+                showErrorState(resultsContainer);
+            }
+        });
+
+        function showLoadingState(container) {
+            container.innerHTML = `
+                <div class="search-loading" style="color: var(--color-slate-700); text-align: center; padding: var(--space-8) 0;">
+                    <p>Searching...</p>
+                </div>
+            `;
+        }
+
+        function showEmptyState(container, query) {
+            const message = query
+                ? `No results found for "${escapeHtml(query)}". Try different keywords.`
+                : "Enter a search query to find TILs.";
+            container.innerHTML = `
+                <div class="search-empty" style="color: var(--color-slate-700); text-align: center; padding: var(--space-8) 0;">
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        function showErrorState(container) {
+            container.innerHTML = `
+                <div class="search-error" style="color: var(--color-burgundy); text-align: center; padding: var(--space-8) 0;">
+                    <p>Search is currently unavailable. Please try again later.</p>
+                </div>
+            `;
+        }
+
+        async function renderResults(results, container) {
+            // Load full result data in parallel
+            const dataPromises = results.map(r => r.data());
+            const resultsData = await Promise.all(dataPromises);
+
+            // Render each result
+            resultsData.forEach(data => {
+                const article = createTilItem(data);
+                container.appendChild(article);
+            });
+        }
+
+        function createTilItem(data) {
+            const article = document.createElement("article");
+            article.className = "til-item";
+
+            // Extract metadata
+            const url = data.url;
+            const title = data.meta.title || "Untitled";
+            const topic = extractTopic(data);
+            const date = extractDate(data);
+            const excerpt = data.excerpt || "";
+
+            // Create headline grid
+            const headline = document.createElement("div");
+            headline.className = "til-headline";
+
+            // Topic pill (if available)
+            if (topic) {
+                const topicPill = document.createElement("a");
+                topicPill.className = "til-topic-pill";
+                topicPill.href = `/topics/${topic}/`;
+                topicPill.textContent = topic;
+                headline.appendChild(topicPill);
+            }
+
+            // Title link
+            const titleLink = document.createElement("a");
+            titleLink.className = "til-title";
+            titleLink.href = url;
+            titleLink.textContent = title;
+            headline.appendChild(titleLink);
+
+            // Date
+            if (date) {
+                const dateEl = document.createElement("time");
+                dateEl.className = "til-date";
+                dateEl.setAttribute("datetime", date);
+                dateEl.textContent = date;
+                headline.appendChild(dateEl);
+            }
+
+            article.appendChild(headline);
+
+            // Excerpt with search highlighting
+            if (excerpt) {
+                const excerptEl = document.createElement("p");
+                excerptEl.innerHTML = excerpt; // Pagefind provides HTML with <mark> tags
+                article.appendChild(excerptEl);
+            }
+
+            return article;
+        }
+
+        function extractTopic(data) {
+            // Try to extract topic from URL
+            // URL format: /topics/{topic}/{slug}/
+            const match = data.url.match(/\/topics\/([^\/]+)\//);
+            if (match) {
+                return match[1];
+            }
+            return null;
+        }
+
+        function extractDate(data) {
+            // Extract date from meta
+            return data.meta.date || null;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+{% endblock %}

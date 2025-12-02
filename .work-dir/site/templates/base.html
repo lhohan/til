@@ -32,6 +32,15 @@
         <span class="wordmark">HanLHo TIL</span>
       </a>
       <div class="primary-nav">
+        <form class="nav-search" action="{{ get_url(path="/search/") }}" method="get">
+        <input
+            type="search"
+            class="nav-search__input"
+            name="q"
+            placeholder="Search"
+            aria-label="Search"
+        >
+        </form>
         <!--<a href="{{ get_url(path="/topics") }}">Topics</a>-->
         <a href="{{ get_url(path="/atom.xml") }}">RSS</a>
         {% if config.extra.github_repo %}
