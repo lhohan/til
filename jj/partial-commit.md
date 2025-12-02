@@ -1,7 +1,12 @@
++++
+title = "Partial commit"
+date = 2025-12-01
+[taxonomies]
+topics = ["jj"]
++++
 
 TLDR: Use `jj commit -m "..." <files>`, not `jj split`, to commit related changes from a working copy that contains unrelated changes.
 
----
 
 When having changes in your working copy that belong to a different task, you can commit related changes with the standard `commit` command. You do **not** need to use the `split` command.
   
@@ -36,3 +41,4 @@ Next to verify to ensure only the desired file landed in the new commit:
 - `jj show @-` or `jj diff -r @-..@` : shows the changes between the current ref and the previous one, in other words the changes done by the commit
 
 If you truly need to split an existing commit in place (instead of making a new one) use `jj split`.
+)

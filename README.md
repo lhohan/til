@@ -18,7 +18,7 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). Built with [
 ### Jj
 
 - [Untracking an already commited file](jj/untracking-an-already-commited-file.md)
-- [Partial Commit](jj/partial-commit.md)
+- [Partial commit](jj/partial-commit.md)
 
 ### Python
 
