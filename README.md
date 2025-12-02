@@ -8,9 +8,9 @@ Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanl
 **3 TILs** across **1 topics**
 
 
-### Jj
+### Jujutsu
 
-- [Untracking an already commited file](jj/untracking-an-already-commited-file.md)
-- [Partial commit](jj/partial-commit.md)
-- [Split shortcut](jj/split-shortcut.md)
+- [Untracking an already commited file](jujutsu/untracking-an-already-commited-file.md)
+- [Partial commit](jujutsu/partial-commit.md)
+- [Split shortcut](jujutsu/split-shortcut.md)
 <!-- TOC END -->
