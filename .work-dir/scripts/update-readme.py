@@ -38,6 +38,31 @@ def ensure_topic_index(topic_dir: Path) -> bool:
     return True
 
 
+def ensure_topic_symlinks() -> None:
+    """Create symlinks in .work-dir/site/content/ for all topic directories."""
+    content_symlink_dir = CONTENT_DIR / ".work-dir/site/content"
+
+    # Ensure the content directory exists
+    content_symlink_dir.mkdir(parents=True, exist_ok=True)
+
+    # Get all valid topic directories from root
+    for item in sorted(CONTENT_DIR.iterdir()):
+        if not item.is_dir() or item.name.startswith("."):
+            continue
+
+        topic_name = item.name
+        symlink_path = content_symlink_dir / topic_name
+
+        # Create symlink if it doesn't exist
+        if not symlink_path.exists():
+            target = Path(f"../../../{topic_name}")
+            try:
+                symlink_path.symlink_to(target)
+                print(f"Created symlink: {topic_name}")
+            except OSError as e:
+                print(f"Warning: Could not create symlink for {topic_name}: {e}")
+
+
 def extract_frontmatter(content: str) -> dict:
     """Extract TOML frontmatter from markdown file."""
     match = re.match(r"^\+\+\+\s*\n(.*?)\n\+\+\+", content, re.DOTALL)
@@ -126,6 +151,7 @@ def update_readme(toc: str) -> bool:
 
 
 def main():
+    ensure_topic_symlinks()
     tils = get_tils()
     if not tils:
         print("No TILs found")
