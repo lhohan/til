@@ -7,7 +7,7 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). Built with [
 ## Table of Contents
 
 <!-- TOC START -->
-**10 TILs** across **5 topics**
+**11 TILs** across **5 topics**
 
 
 ### Git
@@ -19,6 +19,7 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). Built with [
 
 - [Untracking an already commited file](jj/untracking-an-already-commited-file.md)
 - [Partial commit](jj/partial-commit.md)
+- [`Split` shortcut](jj/split-shortcut.md)
 
 ### Python
 

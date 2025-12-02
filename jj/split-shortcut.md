@@ -1,6 +1,11 @@
++++
+title = "`Split` shortcut"
+date = 2025-12-01
+[taxonomies]
+topics = ["jj"]
++++
 
-
-If you truly need to split an existing commit in place (instead of making a new one), pass the files to `jj split` to keep it non-interactive:
+If you truly need to split an existing commit in place (instead of making a new one), pass the files to `jj split` to make it non-interactive:
 
 ```bash
 jj split static/css/main.css
