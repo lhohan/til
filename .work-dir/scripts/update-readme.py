@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """
 Scan TIL content and update README.md with a table of contents.
-Injects TOC between <!-- TOC START --> and <!-- TOC END --> markers.
+
+This script:
+- Scans all topic directories at the root level
+- Extracts metadata (title, date) from markdown file frontmatter
+- Generates a TOC sorted by topic and date
+- Injects the TOC between <!-- TOC START --> and <!-- TOC END --> markers in README.md
+
+This runs as part of the build process to keep the README in sync with TIL content.
 """
 
 import re
@@ -13,54 +20,6 @@ README_PATH = Path(__file__).parent.parent.parent / "README.md"
 
 TOC_START = "<!-- TOC START -->"
 TOC_END = "<!-- TOC END -->"
-
-TOPIC_INDEX_TEMPLATE = """+++
-title = "{title}"
-sort_by = "date"
-template = "section.html"
-page_template = "page.html"
-transparent = true
-+++\n"""
-
-
-def format_topic_title(name: str) -> str:
-    return name.replace("-", " ").title()
-
-
-def ensure_topic_index(topic_dir: Path) -> bool:
-    index_path = topic_dir / "_index.md"
-    if index_path.exists():
-        return False
-
-    title = format_topic_title(topic_dir.name)
-    index_path.write_text(TOPIC_INDEX_TEMPLATE.format(title=title))
-    print(f"Created _index.md for {title}")
-    return True
-
-
-def ensure_topic_symlinks() -> None:
-    """Create symlinks in .work-dir/site/content/ for all topic directories."""
-    content_symlink_dir = CONTENT_DIR / ".work-dir/site/content"
-
-    # Ensure the content directory exists
-    content_symlink_dir.mkdir(parents=True, exist_ok=True)
-
-    # Get all valid topic directories from root
-    for item in sorted(CONTENT_DIR.iterdir()):
-        if not item.is_dir() or item.name.startswith("."):
-            continue
-
-        topic_name = item.name
-        symlink_path = content_symlink_dir / topic_name
-
-        # Create symlink if it doesn't exist
-        if not symlink_path.exists():
-            target = Path(f"../../../{topic_name}")
-            try:
-                symlink_path.symlink_to(target)
-                print(f"Created symlink: {topic_name}")
-            except OSError as e:
-                print(f"Warning: Could not create symlink for {topic_name}: {e}")
 
 
 def extract_frontmatter(content: str) -> dict:
@@ -91,7 +50,6 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
             continue
 
         topic_dir = item
-        ensure_topic_index(topic_dir)
         topic = topic_dir.name
 
         for md_file in sorted(topic_dir.glob("*.md")):
@@ -151,7 +109,6 @@ def update_readme(toc: str) -> bool:
 
 
 def main():
-    ensure_topic_symlinks()
     tils = get_tils()
     if not tils:
         print("No TILs found")
