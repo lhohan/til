@@ -1,10 +1,8 @@
 # Today I Learned
 
-A collection of concise write-ups on small things I learn day to day across various topics.
+My Today I Learned snippets. Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). For details on implementation and tooling see [development](DEVELOPMENT.md).
 
-Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). For details on implementation and tooling see [development](DEVELOPMENT.md).
-
-## Table of Contents
+Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
 **11 TILs** across **5 topics**
@@ -42,7 +40,3 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). For details 
 ```bash
 just new-til <topic> <slug>
 ```
-
-## License
-
-MIT

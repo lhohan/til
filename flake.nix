@@ -17,6 +17,7 @@
             just
             python3
             zola
+            pagefind
           ];
 
           shellHook = ''

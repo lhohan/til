@@ -22,6 +22,8 @@
   <!-- Styles -->
   <link rel="stylesheet" href="{{ get_url(path="/css/reset.css") }}">
   <link rel="stylesheet" href="{{ get_url(path="/css/styles.css") }}">
+
+  {% block head_extra %}{% endblock %}
 </head>
 <body>
   <header class="site-header">

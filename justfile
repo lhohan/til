@@ -9,7 +9,10 @@ dev: build-content
 
 # Production build
 build: build-content
-    cd .work-dir/site && zola build
+    cd .work-dir/site && zola build && pagefind --site public
+
+pagefind:
+    cd .work-dir/site && pagefind --site public
 
 check:
     cd .work-dir/site && zola check
@@ -19,7 +22,7 @@ new-til topic slug:
 
 # Hidden tasks (prefixed with _ to hide from just --list)
 _prepare-site:
-    python3 .work-dir/scripts/prepare-site.py
+    python3 .work-dir/site/prepare-site.py
 
 _update-readme:
     python3 .work-dir/scripts/update-readme.py
