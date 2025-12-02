@@ -14,9 +14,3 @@ Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanl
 - [Partial commit](jj/partial-commit.md)
 - [`Split` shortcut](jj/split-shortcut.md)
 <!-- TOC END -->
-
-## Adding a TIL
-
-```bash
-just new-til <topic> <slug>
-```
