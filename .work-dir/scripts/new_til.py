@@ -31,21 +31,6 @@ def derive_title(slug: str) -> str:
     return slug.replace("-", " ").title()
 
 
-def build_front_matter(*, title: str, topic: str) -> str:
-    today = date.today().isoformat()
-    return "\n".join(
-        [
-            "+++",
-            f'title = "{title}"',
-            f"date = {today}",
-            "[taxonomies]",
-            f'topics = ["{topic}"]',
-            "+++",
-            "",
-        ]
-    )
-
-
 def create_entry(topic: str, slug: str) -> Path:
     ensure_valid_slug(slug)
 
@@ -56,9 +41,18 @@ def create_entry(topic: str, slug: str) -> Path:
     if target_file.exists():
         raise FileExistsError(f"Entry already exists: {target_file}")
 
-    front_matter = build_front_matter(title=derive_title(slug), topic=topic)
-    body = "Describe what you learned here.\n"
-    target_file.write_text(f"{front_matter}\n{body}", encoding="utf-8")
+    title = derive_title(slug)
+    today = date.today().isoformat()
+
+    # Create plain markdown with H1 and footer
+    content = f"""# {title}
+
+Describe what you learned here.
+
+_Created: {today}_
+"""
+
+    target_file.write_text(content, encoding="utf-8")
     return target_file
 
 

@@ -3,14 +3,23 @@
 Prepare static site infrastructure for Zola.
 
 This script handles Zola-specific setup tasks:
-- Creates symlinks in .work-dir/site/content/ pointing to root topic directories
+- Copies TIL markdown files from root topic directories to .work-dir/site/content/
+- Injects TOML frontmatter during copy (extracts from H1 and footer metadata)
 - Generates _index.md files for topics that don't have them
 
 This runs before every build via the justfile to ensure the Zola site
 has the correct structure.
 """
 
+import sys
 from pathlib import Path
+
+# Add scripts directory to path for imports
+SCRIPTS_DIR = Path(__file__).parent.parent / "scripts"
+sys.path.insert(0, str(SCRIPTS_DIR))
+
+from metadata_utils import get_metadata_for_file, inject_frontmatter
+
 
 CONTENT_DIR = Path(__file__).parent.parent.parent
 
@@ -28,6 +37,14 @@ def format_topic_title(name: str) -> str:
     return name.replace("-", " ").title()
 
 
+def get_topic_dirs() -> list[Path]:
+    """Get all valid topic directories from root."""
+    return [
+        item for item in sorted(CONTENT_DIR.iterdir())
+        if item.is_dir() and not item.name.startswith(".")
+    ]
+
+
 def ensure_topic_index(topic_dir: Path) -> bool:
     """Create _index.md for topic if it doesn't exist."""
     index_path = topic_dir / "_index.md"
@@ -40,40 +57,70 @@ def ensure_topic_index(topic_dir: Path) -> bool:
     return True
 
 
-def ensure_topic_symlinks() -> None:
-    """Create symlinks in .work-dir/site/content/ for all topic directories."""
-    content_symlink_dir = CONTENT_DIR / ".work-dir/site/content"
+def copy_topic_files() -> None:
+    """
+    Copy TIL files from root to .work-dir/site/content/ with frontmatter injection.
 
-    # Ensure the content directory exists
-    content_symlink_dir.mkdir(parents=True, exist_ok=True)
+    For each topic directory:
+    - Copy markdown files to site/content/{topic}/
+    - Extract metadata from H1 and footer
+    - Inject TOML frontmatter for Zola
+    """
+    content_dest_dir = CONTENT_DIR / ".work-dir/site/content"
+    content_dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Get all valid topic directories from root
-    for item in sorted(CONTENT_DIR.iterdir()):
-        if not item.is_dir() or item.name.startswith("."):
+    # Track which files we've copied (to clean up orphans)
+    copied_files = set()
+
+    for topic_dir in get_topic_dirs():
+        dest_dir = content_dest_dir / topic_dir.name
+        dest_dir.mkdir(exist_ok=True)
+
+        for md_file in topic_dir.glob("*.md"):
+            # _index.md gets copied as-is (no transformation needed)
+            if md_file.name == "_index.md":
+                dest_file = dest_dir / md_file.name
+                dest_file.write_text(md_file.read_text(encoding='utf-8'), encoding='utf-8')
+                copied_files.add(dest_file)
+                continue
+
+            # Read plain markdown
+            content = md_file.read_text(encoding='utf-8')
+
+            # Extract metadata (H1, footer date, topic from path)
+            metadata = get_metadata_for_file(md_file)
+
+            # Inject frontmatter
+            augmented_content = inject_frontmatter(content, metadata)
+
+            # Write to destination
+            dest_file = dest_dir / md_file.name
+            dest_file.write_text(augmented_content, encoding='utf-8')
+            copied_files.add(dest_file)
+
+    # Clean up orphaned files (files in dest that no longer exist in source)
+    # Skip special directories like 'search' that are managed separately
+    for topic_dest_dir in content_dest_dir.iterdir():
+        if not topic_dest_dir.is_dir() or topic_dest_dir.name.startswith("."):
             continue
 
-        topic_name = item.name
-        symlink_path = content_symlink_dir / topic_name
+        # Skip special directories (search, etc.)
+        if topic_dest_dir.name in ("search",):
+            continue
 
-        # Create symlink if it doesn't exist
-        if not symlink_path.exists():
-            target = Path(f"../../../{topic_name}")
-            try:
-                symlink_path.symlink_to(target)
-                print(f"Created symlink: {topic_name}")
-            except OSError as e:
-                print(f"Warning: Could not create symlink for {topic_name}: {e}")
+        for dest_file in topic_dest_dir.glob("*.md"):
+            if dest_file not in copied_files:
+                print(f"Removing orphaned file: {dest_file.relative_to(content_dest_dir)}")
+                dest_file.unlink()
 
 
 def main():
     """Prepare Zola site infrastructure."""
-    # 1. Create symlinks first
-    ensure_topic_symlinks()
+    # 1. Copy topic files with frontmatter injection
+    copy_topic_files()
 
     # 2. Create _index.md files for all topics
-    for item in sorted(CONTENT_DIR.iterdir()):
-        if not item.is_dir() or item.name.startswith("."):
-            continue
+    for item in get_topic_dirs():
         ensure_topic_index(item)
 
 

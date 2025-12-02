@@ -4,7 +4,7 @@ Scan TIL content and update README.md with a table of contents.
 
 This script:
 - Scans all topic directories at the root level
-- Extracts metadata (title, date) from markdown file frontmatter
+- Extracts metadata (title, date) from markdown files (H1 and footer)
 - Generates a TOC sorted by topic and date
 - Injects the TOC between <!-- TOC START --> and <!-- TOC END --> markers in README.md
 
@@ -12,30 +12,20 @@ This runs as part of the build process to keep the README in sync with TIL conte
 """
 
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+# Add current directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from metadata_utils import extract_h1_title, extract_footer_date, parse_existing_frontmatter
 
 CONTENT_DIR = Path(__file__).parent.parent.parent
 README_PATH = Path(__file__).parent.parent.parent / "README.md"
 
 TOC_START = "<!-- TOC START -->"
 TOC_END = "<!-- TOC END -->"
-
-
-def extract_frontmatter(content: str) -> dict:
-    """Extract TOML frontmatter from markdown file."""
-    match = re.match(r"^\+\+\+\s*\n(.*?)\n\+\+\+", content, re.DOTALL)
-    if not match:
-        return {}
-
-    fm = {}
-    for line in match.group(1).split("\n"):
-        if "=" in line:
-            key, value = line.split("=", 1)
-            key = key.strip()
-            value = value.strip().strip('"')
-            fm[key] = value
-    return fm
 
 
 def get_tils() -> dict[str, list[tuple[str, str, str]]]:
@@ -55,13 +45,20 @@ def get_tils() -> dict[str, list[tuple[str, str, str]]]:
         for md_file in sorted(topic_dir.glob("*.md")):
             if md_file.name == "_index.md":
                 continue
-            content = md_file.read_text()
-            fm = extract_frontmatter(content)
 
-            title = fm.get("title", md_file.stem)
-            date = fm.get("date", "")
+            content = md_file.read_text(encoding='utf-8')
+
+            # Try new plain markdown format first
+            title = extract_h1_title(content)
+            date = extract_footer_date(content)
+
+            # Fallback to old frontmatter format for backward compatibility
+            if not title or not date:
+                fm, _ = parse_existing_frontmatter(content)
+                title = title or fm.get("title", md_file.stem)
+                date = date or fm.get("date", "")
+
             rel_path = md_file.relative_to(CONTENT_DIR)
-
             tils[topic].append((title, date, str(rel_path)))
 
     return dict(tils)

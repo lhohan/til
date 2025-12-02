@@ -12,5 +12,5 @@ Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanl
 
 - [Untracking an already commited file](jj/untracking-an-already-commited-file.md)
 - [Partial commit](jj/partial-commit.md)
-- [`Split` shortcut](jj/split-shortcut.md)
+- [Split shortcut](jj/split-shortcut.md)
 <!-- TOC END -->

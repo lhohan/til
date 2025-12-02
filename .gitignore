@@ -1,5 +1,11 @@
 # Build artifacts
 .work-dir/site/public/
+.work-dir/site/content/
+!.work-dir/site/content/search/
+
+# Python
+__pycache__/
+*.pyc
 
 # Nix
 .envrc

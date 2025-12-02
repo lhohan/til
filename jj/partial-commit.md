@@ -1,9 +1,4 @@
-+++
-title = "Partial commit"
-date = 2025-12-01
-[taxonomies]
-topics = ["jj"]
-+++
+# Partial commit
 
 TLDR: Use `jj commit -m "..." <files>`, not `jj split`, to commit related changes from a working copy that contains unrelated changes.
 
@@ -42,3 +37,5 @@ Next to verify to ensure only the desired file landed in the new commit:
 
 If you truly need to split an existing commit in place (instead of making a new one) use `jj split`.
 )
+
+_Created: 2025-12-01_

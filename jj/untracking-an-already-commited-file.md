@@ -1,9 +1,4 @@
-+++
-title = "Untracking an already commited file"
-date = 2025-12-02
-[taxonomies]
-topics = ["jj"]
-+++
+# Untracking an already commited file
 
 I accidentally commited a file that should not be tracked. If there is no sensitive data in it (yet), here is how you can remove it from the working copy.
 
@@ -37,3 +32,5 @@ To stop tracking, you must explicitly remove it from the repository tree. Since 
 There's no single command for "untrack but keep local" (understandably).
 
 Note: I used `rm` directly instead of `jj file untrack` which would have the same effect. I prefer the direct `rm`-remove because it is more intentional: we are explicitly removing the file from the repository. `jj file untrack` is/feels more designed to stop tracking a file in the working copy that has not been committed yet.
+
+_Created: 2025-12-02_
