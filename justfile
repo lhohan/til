@@ -3,13 +3,13 @@ set shell := ["bash", "-uc"]
 # Main build task - prepares site and updates README
 build-content: _prepare-site _update-readme
 
-# Development server
 dev: build-content
     cd .work-dir/site && zola serve --drafts
 
-# Production build
-build: build-content
-    cd .work-dir/site && zola build && pagefind --site public
+build: build-content zola-build pagefind
+
+zola-build:
+    cd .work-dir/site && zola build
 
 pagefind:
     cd .work-dir/site && pagefind --site public
