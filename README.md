@@ -1,12 +1,11 @@
 # Today I Learned
 
-My Today I Learned snippets. Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). For details on implementation and tooling see [development](DEVELOPMENT.md).
+A collection of concise write-ups on small things I learn day to day.
 
-Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanlho.com/atom.xml).
+Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
 **3 TILs** across **1 topics**
-
 
 ### Jujutsu
 
@@ -14,3 +13,5 @@ Search these TILs at https://til.hanlho.com/ . [Atom feed here](https://til.hanl
 - [Partial commit](jujutsu/partial-commit.md)
 - [Split shortcut](jujutsu/split-shortcut.md)
 <!-- TOC END -->
+
+For details on implementation and tooling see [development](DEVELOPMENT.md).
