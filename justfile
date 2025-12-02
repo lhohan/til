@@ -9,6 +9,9 @@ build: update-readme
 check:
     cd .work-dir/site && zola check
 
+new-til topic slug:
+    python3 .work-dir/scripts/new_til.py {{topic}} {{slug}}
+
 update-readme:
     python3 .work-dir/scripts/update-readme.py
 
