@@ -7,13 +7,17 @@ Inspired by [Simon Willison's TIL](https://til.simonwillison.net/). Built with [
 ## Table of Contents
 
 <!-- TOC START -->
-**8 TILs** across **4 topics**
+**9 TILs** across **5 topics**
 
 
 ### Git
 
 - [[DEMO] Git worktrees for parallel branches](git/demo-worktrees-parallel-branches.md)
 - [[DEMO] Interactive rebase with autosquash](git/demo-interactive-rebase-autosquash.md)
+
+### Jj
+
+- [Untracking an already commited file](jj/untracking-an-already-commited-file.md)
 
 ### Python
 
