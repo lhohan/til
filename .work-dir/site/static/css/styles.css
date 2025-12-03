@@ -34,6 +34,22 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* Skip to content link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-burgundy);
+    color: var(--color-white);
+    padding: var(--space-2) var(--space-4);
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
 body {
     color: var(--color-noir);
     background: var(--color-offwhite);

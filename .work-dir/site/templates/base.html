@@ -45,19 +45,21 @@
   {% block head_extra %}{% endblock %}
 </head>
 <body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
   <header class="site-header">
-    <nav class="container nav">
+    <nav class="container nav" aria-label="Primary navigation">
       <a href="{{ get_url(path="/") }}" class="brand">
         <span class="wordmark">Hans L'Hoest's TILs</span>
       </a>
       <div class="primary-nav">
-        <form class="nav-search" action="{{ get_url(path="/search/") }}" method="get">
+        <form class="nav-search" action="{{ get_url(path="/search/") }}" method="get" aria-label="Search form">
         <input
             type="search"
             class="nav-search__input"
             name="q"
             placeholder="Search"
-            aria-label="Search"
+            aria-label="Search TILs"
         >
         </form>
         <!--<a href="{{ get_url(path="/topics") }}">Topics</a>-->
