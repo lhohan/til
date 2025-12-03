@@ -503,6 +503,26 @@ ol {
     min-height: 50vh;
 }
 
+.clear-search {
+    background: none;
+    border: none;
+    color: var(--color-burgundy);
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-left: var(--space-3);
+    padding: 0;
+}
+
+.clear-search:hover {
+    opacity: 0.8;
+}
+
+.clear-search:focus-visible {
+    outline: 2px solid var(--color-burgundy);
+    outline-offset: 2px;
+}
+
 /* Search result highlighting */
 .til-item mark {
     background-color: rgba(122, 30, 36, 0.15);

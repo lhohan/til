@@ -6,8 +6,9 @@
         <h1>Search</h1>
         <p class="search-summary">
             Showing <span id="result-count">0</span> results for <span id="search-query">all entries</span>
+            <button id="clear-search" class="clear-search" style="display: none;" aria-label="Clear search">Clear</button>
         </p>
-        <section class="til-list" id="search-results">
+        <section class="til-list" id="search-results" role="region" aria-label="Search results" aria-live="polite">
             <!-- Results will be dynamically inserted here -->
         </section>
     </section>
@@ -22,13 +23,30 @@
             const resultsContainer = document.getElementById("search-results");
             const queryLabel = document.getElementById("search-query");
             const resultCountLabel = document.getElementById("result-count");
+            const clearSearchBtn = document.getElementById("clear-search");
+            const searchInput = document.querySelector(".nav-search__input");
 
             const params = new URLSearchParams(window.location.search);
             const query = params.get("q") || "";
 
+            // Auto-focus search input if query exists
+            if (query && searchInput) {
+                searchInput.focus();
+            }
+
             // Update query display
             if (queryLabel) {
                 queryLabel.textContent = query ? `"${query}"` : "all entries";
+            }
+
+            // Show/hide clear button
+            if (clearSearchBtn && query) {
+                clearSearchBtn.style.display = "inline";
+                clearSearchBtn.addEventListener("click", function() {
+                    searchInput.value = "";
+                    searchInput.focus();
+                    window.location.href = "{{ get_url(path="/search/") }}";
+                });
             }
 
             // Show loading state
@@ -103,6 +121,31 @@
             resultsData.forEach(data => {
                 const article = createTilItem(data);
                 container.appendChild(article);
+            });
+
+            // Add keyboard navigation
+            addKeyboardNavigation(container);
+        }
+
+        function addKeyboardNavigation(container) {
+            const resultLinks = container.querySelectorAll(".til-title");
+            let currentIndex = -1;
+
+            document.addEventListener("keydown", function(e) {
+                if (resultLinks.length === 0) return;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    currentIndex = Math.min(currentIndex + 1, resultLinks.length - 1);
+                    resultLinks[currentIndex].focus();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    currentIndex = Math.max(currentIndex - 1, 0);
+                    resultLinks[currentIndex].focus();
+                } else if (e.key === "Enter" && document.activeElement.classList.contains("til-title")) {
+                    e.preventDefault();
+                    window.location.href = document.activeElement.href;
+                }
             });
         }
 
