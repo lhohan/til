@@ -27,6 +27,21 @@
   <link rel="stylesheet" href="{{ get_url(path="/css/reset.css") }}">
   <link rel="stylesheet" href="{{ get_url(path="/css/styles.css") }}">
 
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ config.title }}",
+    "description": "{{ config.description }}",
+    "url": "{{ config.base_url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ config.extra.author_name }}"
+    }
+  }
+  </script>
+
   {% block head_extra %}{% endblock %}
 </head>
 <body>

@@ -5,6 +5,27 @@
 {% block og_title %}{{ page.title }}{% endblock %}
 {% block og_description %}{{ page.summary | default(value=config.description) | striptags }}{% endblock %}
 
+{% block head_extra %}
+<!-- Article Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title }}",
+  "description": "{{ page.summary | default(value=config.description) | striptags }}",
+  "datePublished": "{{ page.date | date(format="%Y-%m-%dT%H:%M:%S") }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ config.extra.author_name }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ config.base_url }}{{ page.permalink }}"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <main class="container home-shell">
   <article class="til-article">
