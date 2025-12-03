@@ -61,6 +61,7 @@ body {
 a {
     color: var(--color-burgundy);
     text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 a:hover {
     text-decoration: underline;
@@ -160,6 +161,7 @@ ol {
     font-family: var(--font-sans);
     background: var(--color-white);
     color: var(--color-noir);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-search__input::placeholder {
@@ -223,6 +225,18 @@ ol {
     margin-bottom: var(--space-4);
 }
 
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* TIL List */
 .til-list h2 {
     margin-top: 0;
@@ -231,6 +245,7 @@ ol {
 .til-item {
     padding: var(--space-3) 0;
     border-bottom: 1px solid var(--color-slate-300);
+    animation: fadeIn 0.3s ease-out;
 }
 .til-item:last-child {
     border-bottom: none;
@@ -262,11 +277,13 @@ ol {
     justify-self: start;
     white-space: nowrap;
     text-decoration: none;
+    transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .til-topic-pill:hover {
     text-decoration: none;
     filter: brightness(1.05);
+    transform: translateY(-1px);
 }
 
 .til-title {
@@ -470,10 +487,12 @@ ol {
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
     text-decoration: none;
+    transition: filter 0.2s ease, transform 0.2s ease;
 }
 .btn:hover {
     filter: brightness(0.95);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 /* Section header */
