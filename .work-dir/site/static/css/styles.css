@@ -523,6 +523,47 @@ ol {
     outline-offset: 2px;
 }
 
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+    0% {
+        background-color: var(--color-slate-300);
+    }
+    50% {
+        background-color: rgba(201, 205, 210, 0.5);
+    }
+    100% {
+        background-color: var(--color-slate-300);
+    }
+}
+
+.skeleton {
+    background-color: var(--color-slate-300);
+    animation: skeleton-loading 1s infinite;
+    border-radius: var(--radius-sm);
+    display: block;
+}
+
+.skeleton-pill {
+    width: 60px;
+    height: 20px;
+}
+
+.skeleton-title {
+    height: 16px;
+    width: 80%;
+}
+
+.skeleton-date {
+    height: 12px;
+    width: 80px;
+}
+
+.skeleton-text {
+    height: 14px;
+    width: 100%;
+    margin-top: var(--space-2);
+}
+
 /* Search result highlighting */
 .til-item mark {
     background-color: rgba(122, 30, 36, 0.15);

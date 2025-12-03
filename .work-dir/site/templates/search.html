@@ -87,8 +87,17 @@
 
         function showLoadingState(container) {
             container.innerHTML = `
-                <div class="search-loading" style="color: var(--color-slate-700); text-align: center; padding: var(--space-8) 0;">
-                    <p>Searching...</p>
+                <div class="search-skeleton">
+                    ${Array(3).fill().map(() => `
+                        <article class="til-item">
+                            <div class="til-headline">
+                                <div class="skeleton skeleton-pill"></div>
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-date"></div>
+                            </div>
+                            <div class="skeleton skeleton-text"></div>
+                        </article>
+                    `).join('')}
                 </div>
             `;
         }
