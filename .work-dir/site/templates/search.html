@@ -5,7 +5,7 @@
     <section class="search-page">
         <h1>Search</h1>
         <p class="search-summary">
-            Showing results for <span id="search-query">all entries</span>
+            Showing <span id="result-count">0</span> results for <span id="search-query">all entries</span>
         </p>
         <section class="til-list" id="search-results">
             <!-- Results will be dynamically inserted here -->
@@ -21,6 +21,7 @@
         document.addEventListener("DOMContentLoaded", async function () {
             const resultsContainer = document.getElementById("search-results");
             const queryLabel = document.getElementById("search-query");
+            const resultCountLabel = document.getElementById("result-count");
 
             const params = new URLSearchParams(window.location.search);
             const query = params.get("q") || "";
@@ -47,6 +48,11 @@
 
                 // Clear loading state
                 resultsContainer.innerHTML = "";
+
+                // Update result count
+                if (resultCountLabel) {
+                    resultCountLabel.textContent = results.results.length;
+                }
 
                 if (results.results.length === 0) {
                     showEmptyState(resultsContainer, query);
