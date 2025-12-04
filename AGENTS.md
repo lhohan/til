@@ -1,96 +1,81 @@
 # CLAUDE.md
 
-This file provides guidance to LLM's like Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for LLM assistants working with this codebase.
 
-## Version Control
-
-This repository uses **Jujutsu (jj)**, not git. Always use `jj` commands for version control operations.
-
-## Development Commands
+## Quick Reference: Development Commands
 
 ```bash
-# Start local development server (builds content + serves with Zola)
-just dev
-
-# Create new TIL entry
-just new-til <topic> <slug>
-# Example: just new-til python my-learning
-
-# Update README TOC and prepare Zola site structure
-just build-content
-
-# Production build (includes pagefind search indexing)
-just build
-
-# Check Zola configuration and content
-just check
+just dev              # Start development server
+just new-til <topic> <slug>  # Create new TIL entry
+just build-content    # Prepare site (transform content + update README)
+just build            # Full production build (includes search indexing)
+just check            # Validate Zola configuration
+just clean            # Remove generated output (.work-dir/site/public/)
 ```
 
-## Repository Architecture
+## Project Overview
 
-This is a personal knowledge base that publishes TILs (Today I Learned) both as:
-1. Git-native markdown files organized by topic directories
-2. A static website at https://til.hanlho.com built with Zola
+Personal knowledge base publishing TILs (Today I Learned) as:
+1. Git-native markdown files in flat root-level topic directories
+2. Static website at https://til.hanlho.com (built with Zola)
 
-### Content Structure
+**Core content model contract**: Flat root-level topic directories with markdown files.
 
-The core "content model" contract: flat root-level topic directories with markdown files.
+## Architecture Context
 
-- **Topic directories** (root level)
-  - Each contains TIL markdown files
-  - Each has an `_index.md` for topic metadata
-  - TIL files have TOML frontmatter with title, date, and topics taxonomy
+### Source Content Format
 
-- **`.work-dir/site/`**: Zola static site generator
-  - `content/`: Symlinks to root topic directories (auto-created by prepare-site.py)
-  - `templates/`: Zola HTML templates
-  - `config.toml`: Zola configuration
+TIL markdown files use simple plain markdown format (located in root topic directories):
 
-- **`.work-dir/scripts/`**: Python automation utilities
+```markdown
+# Your TIL Title
 
-### Build Process Flow
+Content goes here...
 
-```
-1. prepare-site.py
-   ├─ Creates symlinks in .work-dir/site/content/ → root topic dirs
-   └─ Generates _index.md files for each topic
-
-2. update-readme.py
-   └─ Scans TILs and updates README TOC (between <!-- TOC START/END --> markers)
-
-3. zola build
-   └─ Generates static site in .work-dir/site/public/
-
-4. pagefind (production only)
-   └─ Indexes site for full-text search
+_Created: YYYY-MM-DD_
 ```
 
-The `just build-content` command runs steps 1-2. The `just dev` command runs build-content then serves with Zola. The `just build` command runs all steps for production.
+- **H1 heading**: becomes the page title
+- **Markdown body**: the TIL content
+- **Footer pattern**: `_Created: YYYY-MM-DD_` provides publication date
 
-## Creating New TILs
+### Build System
 
-Use `just new-til <topic> <slug>` which:
-- Creates a new markdown file at `<topic>/<slug>.md`
-- Auto-generates TOML frontmatter with title (derived from slug), date, and topics taxonomy
-- Validates slug format (lowercase letters, digits, hyphens only)
+- **`.work-dir/site/prepare-site.py`**: Transforms source files (injects TOML frontmatter, strips H1/footer)
+- **`.work-dir/site/content/`**: Transformed files ready for Zola (auto-created)
+- **`.work-dir/site/templates/`**: Zola HTML templates
+- **`.work-dir/site/config.toml`**: Zola configuration
+- **`.work-dir/scripts/`**: Python utilities (new_til.py, update-readme.py, metadata_utils.py)
 
-TIL frontmatter format:
-```toml
-+++
-title = "Title Here"
-date = YYYY-MM-DD
-[taxonomies]
-topics = ["topic-name"]
-+++
-```
+### Build Pipeline
 
-After creating a TIL, run `just build-content` to update the README TOC and prepare the Zola site structure.
+The `just build-content` command orchestrates:
+1. `prepare-site.py` - Copies files, extracts metadata, injects frontmatter
+2. `update-readme.py` - Updates README TOC
 
-## Deployment
+Then `just dev` or `just build` runs Zola and optionally pagefind search indexing.
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically:
-1. Updates README TOC
-2. Builds site with Zola
-3. Deploys to VPS via rsync
+## For LLM Assistants: Additional Context
 
-Triggers on push to `main` branch affecting TIL content or site configuration.
+When working on build system changes:
+- Read `.work-dir/agent_docs/README.md` for architecture overview
+- For implementation details, read the source code directly (prepare-site.py, metadata_utils.py, etc.)
+
+## Working with This Repository
+
+**Before modifying build scripts or content transformation**:
+1. Understand the pipeline: source (H1 + footer) → prepare-site.py (transforms) → Zola (generates)
+2. Read relevant source code: `.work-dir/site/prepare-site.py`, `.work-dir/scripts/metadata_utils.py`
+3. Test with `just dev` to verify changes work
+
+**When creating new TILs**:
+- Use `just new-til <topic> <slug>` (not manual file creation)
+- This creates plain markdown with H1 and footer template
+- Edit the file, then run `just build-content` to update README
+- Verify with `just dev`
+
+**When debugging build issues**:
+- Run `just check` to validate Zola configuration
+- Use `just clean` then rebuild if output seems stale
+- Check `.work-dir/site/content/` to see transformed files
+- Most issues are in prepare-site.py metadata extraction
