@@ -2,10 +2,10 @@
 
 A collection of concise write-ups on small things I learn day to day.
 
-Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
+`Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**4 TILs** across **2 topics**
+**5 TILs** across **3 topics**
 
 
 ### Jujutsu
@@ -17,6 +17,10 @@ Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlh
 ### Llm
 
 - [Claude Code Mcp Management](llm/claude-code-mcp-management.md)
+
+### Zed
+
+- [How To Colourize Brackets](zed/how-to-colourize-brackets.md)
 <!-- TOC END -->
 
 For details on implementation and tooling see [development](DEVELOPMENT.md).
