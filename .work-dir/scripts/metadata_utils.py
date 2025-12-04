@@ -53,20 +53,61 @@ def extract_topic_from_path(file_path: Path) -> str:
     return file_path.parent.name
 
 
+def transform_relative_image_paths(content: str, topic: str) -> str:
+    """
+    Transform relative image paths to absolute paths for Zola.
+
+    Converts markdown image references from relative paths (GitHub-compatible)
+    to absolute paths (Zola-compatible). Preserves external URLs, data URLs,
+    and already-absolute paths.
+
+    Args:
+        content: Markdown content with image references
+        topic: Topic name (used for absolute path prefix)
+
+    Returns:
+        Content with relative image paths transformed to absolute
+
+    Examples:
+        >>> transform_relative_image_paths("![alt](images/a.png)", "zed")
+        "![alt](/zed/images/a.png)"
+
+        >>> transform_relative_image_paths("![alt](https://ex.com/a.png)", "zed")
+        "![alt](https://ex.com/a.png)"  # Unchanged
+
+        >>> transform_relative_image_paths("![alt](/zed/a.png)", "zed")
+        "![alt](/zed/a.png)"  # Unchanged (already absolute)
+    """
+    # Match ![alt](path) where path is relative (no leading /, no http://, no data:)
+    # Negative lookahead: (?!https?://|//|data:|/)
+    # This filters out:
+    # - http:// and https:// (external URLs)
+    # - // (protocol-relative URLs)
+    # - data: (data URLs)
+    # - / (already absolute paths)
+    pattern = r'!\[([^\]]*)\]\((?!https?://|//|data:|/)([^)]+)\)'
+    replacement = f'![\\1](/{topic}/\\2)'
+
+    return re.sub(pattern, replacement, content)
+
+
 def inject_frontmatter(content: str, metadata: dict) -> str:
     """
     Prepend TOML frontmatter to markdown content and strip H1 title and footer date.
+
+    Also transforms relative image paths to absolute paths for Zola.
 
     Args:
         content: Plain markdown content
         metadata: Dict with 'title', 'date', and 'topics' keys
 
     Returns:
-        Content with TOML frontmatter prepended and H1/footer removed
+        Content with TOML frontmatter prepended, H1/footer removed, and image paths transformed
     """
     title = metadata.get('title', 'Untitled')
     date = metadata.get('date', '2025-01-01')
     topics = metadata.get('topics', [])
+    topic = topics[0] if topics else 'unknown'
 
     # Strip H1 title from content (first line that starts with #)
     content = re.sub(r'^# .+$\n*', '', content, count=1, flags=re.MULTILINE)
@@ -74,8 +115,11 @@ def inject_frontmatter(content: str, metadata: dict) -> str:
     # Strip footer date from content (_Created: YYYY-MM-DD_)
     content = re.sub(r'\n*_Created: \d{4}-\d{2}-\d{2}_\s*$', '', content)
 
+    # Transform relative image paths to absolute for Zola
+    content = transform_relative_image_paths(content, topic)
+
     # Format topics array for TOML
-    topics_str = ', '.join(f'"{topic}"' for topic in topics)
+    topics_str = ', '.join(f'"{t}"' for t in topics)
 
     frontmatter = f"""+++
 title = "{title}"

@@ -11,10 +11,11 @@ This directory contains supplementary documentation for the TIL repository build
    - Location: `<topic>/filename.md`
 
 2. **Transform** (`.work-dir/site/prepare-site.py`):
-   - Copies files to `.work-dir/site/content/`
-   - Extracts metadata (title, date, topic)
-   - Injects TOML frontmatter for Zola
-   - Strips H1 and footer from content
+   - Recursively copies markdown files from topic directories to `.work-dir/site/content/`
+   - Recursively copies non-markdown files (images, PDFs, etc.) to `.work-dir/site/static/`
+   - For markdown files: extracts metadata (title, date, topic) and injects TOML frontmatter
+   - Strips H1 and footer from markdown content
+   - Maintains directory structure (supports nested assets in both locations)
 
 3. **Build** (Zola):
    - Reads transformed markdown in `.work-dir/site/content/`
@@ -65,6 +66,32 @@ just new-til <topic> <slug>    # Creates <topic>/<slug>.md
 just build-content              # Updates README + prepares site
 just dev                        # Verify in local server
 ```
+
+## Adding Assets (Images, etc.)
+
+Place assets anywhere in topic directories:
+```
+llm/
+  claude-architecture.md
+  images/diagram.png       # Nested in subdirectory
+  screenshot.png           # Flat structure
+  assets/data.json         # Any file type
+```
+
+Reference with **relative paths** in markdown (GitHub-compatible):
+```markdown
+![Diagram](images/diagram.png)
+![Screenshot](screenshot.png)
+[Data](assets/data.json)
+```
+
+**How it works**:
+- Write relative paths (work on GitHub and are intuitive)
+- Build pipeline automatically transforms them to absolute paths for Zola: `![Diagram](images/diagram.png)` → `![Diagram](/llm/images/diagram.png)`
+- Transformation happens in `metadata_utils.py::transform_relative_image_paths()`
+- External URLs, data URLs, and already-absolute paths are preserved unchanged
+
+The build pipeline recursively copies all non-markdown files to `.work-dir/site/static/` maintaining the directory structure. Zola then serves these files from the site root.
 
 ## Common Workflows
 

@@ -74,6 +74,20 @@ When working on build system changes:
 - Edit the file, then run `just build-content` to update README
 - Verify with `just dev`
 
+**When adding images or other assets to TILs**:
+- Place files anywhere in the topic directory structure (flat or nested)
+- Examples:
+  - `llm/diagram.png` - flat structure
+  - `llm/images/diagram.png` - nested in `images/` directory
+  - `llm/assets/data.json` - any file type, any directory
+
+**Image path convention** (Recommended: Relative Paths):
+- **Use relative paths** in source markdown: `![Diagram](images/diagram.png)`
+  - Works on GitHub repository view ✓
+  - Works on Zola site ✓
+  - Build automatically transforms to `/topic/images/diagram.png`
+- **Why**: Relative paths are intuitive (image location relative to markdown file) and GitHub-compatible
+
 **When debugging build issues**:
 - Run `just check` to validate Zola configuration
 - Use `just clean` then rebuild if output seems stale
