@@ -4,24 +4,14 @@ I accidentally commited a file that should not be tracked. If there is no sensit
 
 I already have the file in `.gitignore`. And I changed it, this is often when I notice it should not have been committed in the first place, so it shows as modified in Jujutsu. Running `jj file untrack` deletes the local file instead of just stopping version control tracking. I still want to keep the file locally.
 
-To untrack a file that's already in repository history while keeping your local copy:
+To untrack a file that's already in repository history while keeping your local copy just copy it to a `.bak` file and copy it back again. Assuming you have ignore your file pattern in `.gitignore` already.
 
 ```bash
 # Using a Claude local settings file as an example.
 
-# 1. Back up the file
-cp .claude/settings.local.json .claude/settings.local.json.backup
+mv .claude/settings.local.json .claude/settings.local.json.backup
+mv .claude/settings.local.json.backup .claude/settings.local.json 
 
-# 2. Remove from tracking (remove from working copy)
-rm .claude/settings.local.json
-
-# 3. Commit the removal
-jj commit -m "Remove .claude/settings.local.json from tracking"
-
-# 4. Restore your local copy
-mv .claude/settings.local.json.backup .claude/settings.local.json
-
-# 5. Verify it's ignored
 jj st --no-pager
 ```
 
