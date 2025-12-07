@@ -6,7 +6,7 @@ This script handles Zola-specific setup tasks:
 - Copies TIL markdown files from root topic directories to .work-dir/site/content/
 - Injects TOML frontmatter during copy (extracts from H1 and footer metadata)
 - Recursively copies all non-markdown files (images, PDFs, etc.) to .work-dir/site/static/
-- Generates _index.md files for topics that don't have them
+- Generates _index.md files for all topics in the content directory
 
 This runs before every build via the justfile to ensure the Zola site
 has the correct structure.
@@ -47,16 +47,12 @@ def get_topic_dirs() -> list[Path]:
     ]
 
 
-def ensure_topic_index(topic_dir: Path) -> bool:
-    """Create _index.md for topic if it doesn't exist."""
-    index_path = topic_dir / "_index.md"
-    if index_path.exists():
-        return False
-
-    title = format_topic_title(topic_dir.name)
+def generate_topic_index(topic_name: str, dest_dir: Path) -> None:
+    """Generate _index.md for topic in the destination content directory."""
+    index_path = dest_dir / "_index.md"
+    title = format_topic_title(topic_name)
     index_path.write_text(TOPIC_INDEX_TEMPLATE.format(title=title))
-    print(f"Created _index.md for {title}")
-    return True
+    print(f"Generated _index.md for {title}")
 
 
 def copy_topic_files() -> None:
@@ -106,13 +102,8 @@ def copy_topic_files() -> None:
             if item.suffix == ".md":
                 dest_item = content_topic_dir / rel_path
 
-                # _index.md gets copied as-is (no transformation needed)
+                # Skip _index.md files (they're generated separately)
                 if item.name == "_index.md":
-                    dest_item.parent.mkdir(parents=True, exist_ok=True)
-                    dest_item.write_text(
-                        item.read_text(encoding="utf-8"), encoding="utf-8"
-                    )
-                    copied_content_items.add(dest_item)
                     continue
 
                 # Read plain markdown
@@ -184,12 +175,15 @@ def copy_topic_files() -> None:
 
 def main():
     """Prepare Zola site infrastructure."""
+    content_dest_dir = CONTENT_DIR / ".work-dir/site/content"
+
     # 1. Copy topic files with frontmatter injection
     copy_topic_files()
 
-    # 2. Create _index.md files for all topics
-    for item in get_topic_dirs():
-        ensure_topic_index(item)
+    # 2. Generate _index.md files for all topics
+    for topic_dir in get_topic_dirs():
+        topic_dest_dir = content_dest_dir / topic_dir.name
+        generate_topic_index(topic_dir.name, topic_dest_dir)
 
 
 if __name__ == "__main__":
