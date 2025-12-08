@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**6 TILs** across **3 topics**
+**7 TILs** across **3 topics**
 
 
 ### Jujutsu
@@ -16,6 +16,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Llm
 
+- [On Reusing Agents And Commands Between Opencode And Claude Code](llm/on-reusing-agents-and-commands-between-opencode-and-claude-code.md)
 - [CHOP Instead Of Vibe Coding](llm/chop-instead-of-vibe-coding.md)
 - [Claude Code Mcp Management](llm/claude-code-mcp-management.md)
 
@@ -25,3 +26,5 @@ A collection of concise write-ups on small things I learn day to day.
 <!-- TOC END -->
 
 For details on implementation and tooling see [development](DEVELOPMENT.md).
+
+Inspired by [Simon Willison's TIL](https://til.simonwillison.net/).
