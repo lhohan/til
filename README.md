@@ -5,11 +5,12 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**7 TILs** across **3 topics**
+**8 TILs** across **3 topics**
 
 
 ### Jujutsu
 
+- [Rebasing A Remote Bookmark](jujutsu/rebasing-a-remote-bookmark.md)
 - [Untracking an already commited file](jujutsu/untracking-an-already-commited-file.md)
 - [Partial commit](jujutsu/partial-commit.md)
 - [Split shortcut](jujutsu/split-shortcut.md)
