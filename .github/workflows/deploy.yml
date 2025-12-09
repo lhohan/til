@@ -1,0 +1,51 @@
+name: Deploy TIL Site
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for proper Nix flake support
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-25.05
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up environment variables
+        env:
+          HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
+          HETZNER_USER: ${{ secrets.HETZNER_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          HEALTH_CHECK_URL: ${{ secrets.HEALTH_CHECK_URL }}
+          HETZNER_SSH_KEY: ${{ secrets.HETZNER_SSH_KEY }}
+        run: |
+          echo "HETZNER_HOST=${HETZNER_HOST}" >> $GITHUB_ENV
+          echo "HETZNER_USER=${HETZNER_USER}" >> $GITHUB_ENV
+          echo "DEPLOY_PATH=${DEPLOY_PATH}" >> $GITHUB_ENV
+          echo "HEALTH_CHECK_URL=${HEALTH_CHECK_URL}" >> $GITHUB_ENV
+
+          # Create SSH key file
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${HETZNER_SSH_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "HETZNER_SSH_KEY_PATH=$HOME/.ssh/id_ed25519" >> $GITHUB_ENV
+
+          # Add host to known_hosts (idempotent)
+          if ! grep -q "${HETZNER_HOST}" ~/.ssh/known_hosts 2>/dev/null; then
+            ssh-keyscan "${HETZNER_HOST}" >> ~/.ssh/known_hosts
+          fi
+
+      - name: Build & Deploy
+        run: nix develop --command just deploy
