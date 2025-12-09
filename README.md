@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**8 TILs** across **3 topics**
+**9 TILs** across **3 topics**
 
 
 ### Jujutsu
@@ -17,6 +17,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Llm
 
+- [Opencode: Use Codex through your OpenAI ChatGPT Plan](llm/opencode-using-your-openai-codex-subscription.md)
 - [On Reusing Agents And Commands Between Opencode And Claude Code](llm/on-reusing-agents-and-commands-between-opencode-and-claude-code.md)
 - [CHOP Instead Of Vibe Coding](llm/chop-instead-of-vibe-coding.md)
 - [Claude Code Mcp Management](llm/claude-code-mcp-management.md)
