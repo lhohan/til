@@ -14,7 +14,7 @@ When you fetch a remote bookmark (git branch) using `jj` at some point you may w
 ❯ jj rebase -r kw -d main
 ```
 
-3. Move the `main` bookmark (assuming you the rebased commit is now on `@-`, otherwise use the appropriate ref):
+3. Move the `main` bookmark (assuming the rebased commit is now on `@-`, otherwise use the appropriate ref):
 
 ```bash
 jj bookmark set main -r @-
