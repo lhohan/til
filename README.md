@@ -5,8 +5,12 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**10 TILs** across **3 topics**
+**11 TILs** across **4 topics**
 
+
+### Ghostty
+
+- [Fix Broken Shift Enter In Ghostty when using Claude Code](ghostty/fix-broken-shift-enter-in-claude-code.md)
 
 ### Jujutsu
 
