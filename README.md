@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**16 TILs** across **6 topics**
+**17 TILs** across **6 topics**
 
 
 ### Ghostty
@@ -14,6 +14,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Jujutsu
 
+- [Swapping Two Commits](jujutsu/swapping-two-commits.md)
 - [Rebasing A Remote Bookmark](jujutsu/rebasing-a-remote-bookmark.md)
 - [Untracking an already commited file](jujutsu/untracking-an-already-commited-file.md)
 - [Partial commit](jujutsu/partial-commit.md)
