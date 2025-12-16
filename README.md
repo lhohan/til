@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**14 TILs** across **5 topics**
+**15 TILs** across **5 topics**
 
 
 ### Ghostty
@@ -25,6 +25,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Llm
 
+- [Install And Manage CLI Agents Using Nix Home Manager](llm/install-and-manage-cli-agents-using-nix-home-manager.md)
 - [Claude Code Web On A New Repo Sets Default Branch Not To Main](llm/claude-code-web-on-a-new-repo-sets-default-branch-not-to-main.md)
 - [Analyse Open Changes, Create Commit Message And Put It In The Clipboard](llm/analyse-open-changes--create-commit-message-and-put-in-clipboard.md)
 - [Opencode: Configure Default Agents' Model](llm/opencode-configure-default-agent-models.md)
