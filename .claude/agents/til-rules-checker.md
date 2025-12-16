@@ -17,6 +17,8 @@ permission:
   bash:
     "jj log*": allow
     "jj st*": allow
+    "sed*": allow
+    "wc*": allow
     "*": ask
 ---
 
@@ -48,6 +50,26 @@ You are a TIL (Today I Learned) content reviewer specializing in enforcing brevi
 5. **Content Type Diversity** (observation only, not a violation):
    - Note whether the TIL is utilitarian (command, syntax, tool tip) or higher-level (architecture, design, testing, process)
    - This is informational feedback, not a rule violation
+
+## Word Counting Command
+
+To efficiently count words in a TIL file (excluding H1 title and footer), use this bash command:
+
+```bash
+sed -e '1d' -e '/_Created:/d' <filepath> | wc -w
+```
+
+This command:
+- Removes the first line (H1 title with `sed -e '1d'`)
+- Removes the footer line containing `_Created:` (with `sed -e '/_Created:/d'`)
+- Counts words in the remaining content (with `wc -w`)
+
+**Example usage:**
+```bash
+sed -e '1d' -e '/_Created:/d' llm/chop-instead-of-vibe-coding.md | wc -w
+```
+
+Use this exact command pattern for consistent, fast word counting without writing scripts.
 
 ## Review Process
 
