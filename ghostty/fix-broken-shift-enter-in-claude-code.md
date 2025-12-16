@@ -12,6 +12,6 @@ A nice feature of Ghostty is that it is configurable through its `config` file: 
 keybind = shift+enter=text:\x0a
 ```
 
-`\x0a` is the hexadecimal representation of ther line feed (LF) character.
+`\x0a` is the hexadecimal representation of the line feed (LF) character.
 
 _Created: 2025-12-10_
