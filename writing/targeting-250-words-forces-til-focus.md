@@ -1,4 +1,4 @@
-# Targeting <250 words forces TIL focus
+# Targeting 250 words forces TIL focus
 
 After a few weeks of writing TILs and finding it taking too long, I went back to the source and decided to focus on a 250-word limit.
 

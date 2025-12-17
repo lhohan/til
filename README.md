@@ -37,7 +37,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Writing
 
-- [Targeting <250 words forces TIL focus](writing/targeting-250-words-forces-til- focus.md)
+- [Targeting 250 words forces TIL focus](writing/targeting-250-words-forces-til-focus.md)
 
 ### Zed
 
