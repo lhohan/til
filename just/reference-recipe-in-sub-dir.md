@@ -1,6 +1,6 @@
 # Reference Recipe In Sub Dir
 
-When you have multiple `justfile`s and you want to refer to recipes in a subdirectory you can use modules instead of "`cd`-ing".
+When you have multiple `justfile`s in a nested directory structure and you want to refer to recipes in a subdirectory, you can use modules instead of changing directory.
 
 Consider
 
@@ -13,7 +13,7 @@ Consider
 └── justfile
 ```
 
-Reference a `build` recipe from the `justfile` in the subdir:
+To reference a `build` recipe from the `justfile` in the subdirectory:
 
 ```bash
 mod bar
@@ -22,7 +22,7 @@ build:
     @just bar::build
 ```
 
-Also works, what I used to do, but less elegant:
+The following also works (what I used to do), but it's less elegant:
 
 ```bash
 build:

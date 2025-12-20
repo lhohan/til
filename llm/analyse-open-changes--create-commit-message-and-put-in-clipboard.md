@@ -47,7 +47,7 @@ The commit message is in your clipboard with no trailing newline.
 ```
 
 And indeed in the clipboard (`Cmd-v`):
-
+    
 ```bash
 refactor: Move PATH configuration to home.sessionPath in Home Manager
 ```
