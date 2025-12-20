@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**18 TILs** across **6 topics**
+**19 TILs** across **7 topics**
 
 
 ### Ghostty
@@ -35,6 +35,10 @@ A collection of concise write-ups on small things I learn day to day.
 - [On Reusing Agents And Commands Between Opencode And Claude Code](llm/on-reusing-agents-and-commands-between-opencode-and-claude-code.md)
 - [CHOP Instead Of Vibe Coding](llm/chop-instead-of-vibe-coding.md)
 - [Claude Code Mcp Management](llm/claude-code-mcp-management.md)
+
+### Nix
+
+- [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
 
 ### Writing
 
