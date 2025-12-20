@@ -15,7 +15,7 @@ Consider
 
 Reference a `build` recipe from the `justfile` in the subdir:
 
-```just
+```bash
 mod bar
 
 build:
@@ -24,7 +24,7 @@ build:
 
 Also works, what I used to do, but less elegant:
 
-```just
+```bash
 build:
     (cd bar && just build)
 ```
