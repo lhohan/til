@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**19 TILs** across **7 topics**
+**22 TILs** across **7 topics**
 
 
 ### Ghostty
@@ -14,6 +14,8 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Jujutsu
 
+- [Squashing Selected Files Into Any Commit](jujutsu/squashing-selected-files-into-any-commit.md)
+- [Squashing Open Changes into Non-Parent Commits](jujutsu/squashing-open-changes-in-non-parent-commits.md)
 - [Squashing Multiple Commits](jujutsu/squashing-multiple-commits.md)
 - [Swapping Two Commits](jujutsu/swapping-two-commits.md)
 - [Rebasing A Remote Bookmark](jujutsu/rebasing-a-remote-bookmark.md)
@@ -46,6 +48,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Zed
 
+- [Creating Markdown Snippets](zed/creating-markdown-snippets.md)
 - [How To Colourize Brackets](zed/how-to-colourize-brackets.md)
 <!-- TOC END -->
 
