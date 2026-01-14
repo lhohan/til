@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**22 TILs** across **7 topics**
+**23 TILs** across **7 topics**
 
 
 ### Ghostty
@@ -14,6 +14,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Jujutsu
 
+- [Ignoring A Tracked File](jujutsu/ignoring-a-tracked-file.md)
 - [Squashing Selected Files Into Any Commit](jujutsu/squashing-selected-files-into-any-commit.md)
 - [Squashing Open Changes into Non-Parent Commits](jujutsu/squashing-open-changes-in-non-parent-commits.md)
 - [Squashing Multiple Commits](jujutsu/squashing-multiple-commits.md)
