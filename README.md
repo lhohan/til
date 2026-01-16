@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**23 TILs** across **7 topics**
+**25 TILs** across **7 topics**
 
 
 ### Ghostty
@@ -14,6 +14,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Jujutsu
 
+- [Fixing Missing Author or Committer on a Commit](jujutsu/fixing-missing-author-committer.md)
 - [Ignoring A Tracked File](jujutsu/ignoring-a-tracked-file.md)
 - [Squashing Selected Files Into Any Commit](jujutsu/squashing-selected-files-into-any-commit.md)
 - [Squashing Open Changes into Non-Parent Commits](jujutsu/squashing-open-changes-in-non-parent-commits.md)
@@ -41,6 +42,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Nix
 
+- [Reporting Changes Done By Homemanager Update](nix/reporting-changes-done-by-homemanager-update.md)
 - [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
 
 ### Writing
