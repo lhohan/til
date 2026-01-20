@@ -5,12 +5,17 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**25 TILs** across **7 topics**
+**27 TILs** across **8 topics**
 
 
 ### Ghostty
 
 - [Fix Broken Shift Enter In Ghostty when using Claude Code](ghostty/fix-broken-shift-enter-in-claude-code.md)
+
+### Homebrew
+
+- [Brew Bundle Supports Rust, Go, and macOS Packages](homebrew/brew-bundle-supports-rust-go-and-macos-packages.md)
+- [Declarative Package Management With Homebrew](homebrew/declarative-package-management-with-homebrew.md)
 
 ### Jujutsu
 
