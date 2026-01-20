@@ -42,7 +42,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Nix
 
-- [Reporting Changes Done By Homemanager Update](nix/reporting-changes-done-by-homemanager-update.md)
+- [Reporting Home Manager Package Changes During Updates](nix/reporting-changes-done-by-homemanager-update.md)
 - [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
 
 ### Writing
