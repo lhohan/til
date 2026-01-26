@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**28 TILs** across **8 topics**
+**30 TILs** across **9 topics**
 
 
 ### Ghostty
@@ -50,6 +50,11 @@ A collection of concise write-ups on small things I learn day to day.
 
 - [Reporting Home Manager Package Changes During Updates](nix/reporting-changes-done-by-homemanager-update.md)
 - [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
+
+### Opencode
+
+- [Opencode Disable Claude Code Compatibility](opencode/opencode-disable-claude-code-integration.md)
+- [Opencode Filtering Models](opencode/filtering-models.md)
 
 ### Writing
 
