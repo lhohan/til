@@ -5,8 +5,13 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**30 TILs** across **9 topics**
+**33 TILs** across **10 topics**
 
+
+### Beads
+
+- [Beads `bd query` defaults to 50 results](beads/beads-query-default-limit.md)
+- [Beads has a dedicated `query` subcommand](beads/beads-query-subcommand.md)
 
 ### Ghostty
 
@@ -48,6 +53,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Nix
 
+- [Declarative npm Wrappers in Nix](nix/declarative-npm-wrappers-in-nix.md)
 - [Reporting Home Manager Package Changes During Updates](nix/reporting-changes-done-by-homemanager-update.md)
 - [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
 
