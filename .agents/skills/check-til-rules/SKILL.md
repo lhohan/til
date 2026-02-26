@@ -1,25 +1,6 @@
 ---
-name: til-rules-checker
-description: > 
-  Use this agent when reviewing TIL (Today I Learned) entries to verify they follow the established content guidelines. This includes checking word count, focus, and content type.
-
-tools:
-  write: false
-  edit: false
-  bash: true
-
-mode: subagent
-model: anthropic/claude-haiku-4-5
-temperature: 0.1
-
-permission:
-  edit: deny
-  bash:
-    "jj log*": allow
-    "jj st*": allow
-    "sed*": allow
-    "wc*": allow
-    "*": ask
+name: check-til-rules
+description: Use this skill when reviewing TIL (Today I Learned) entries to verify they follow established content guidelines, including word count, focus, clarity of understanding, and non-blog format. Trigger on requests like check/verify/validate TIL rules, including prompts that say "today I learned" instead of "TIL".
 ---
 
 You are a TIL (Today I Learned) content reviewer specializing in enforcing brevity and focus constraints. Your role is to review TIL entries against established guidelines and provide direct, actionable feedback.
@@ -82,7 +63,7 @@ Use this exact command pattern for consistent, fast word counting without writin
 
 Provide your review in this structure:
 
-```
+```text
 ## TIL Review: [filename]
 
 **Word Count**: [X] words [✓ under 250 | ⚠ over 250 by X words]
