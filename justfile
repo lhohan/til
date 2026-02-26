@@ -31,6 +31,9 @@ _update-readme:
 clean:
     rm -rf .work-dir/site/public/
 
+import-til-drafts:
+    bash .work-dir/scripts/scan-and-move-tils.sh
+
 # Deployment commands (for local testing)
 # These mirror the GitHub Action steps for local development
 

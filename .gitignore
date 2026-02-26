@@ -30,3 +30,7 @@ Thumbs.db
 ## LLMs
 .claude/settings.local.json
 **/.factory/
+
+## Drafts
+.work-dir/drafts/
+

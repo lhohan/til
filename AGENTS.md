@@ -11,6 +11,7 @@ just build-content    # Prepare site (transform content + update README)
 just build            # Full production build (includes search indexing)
 just check            # Validate Zola configuration
 just clean            # Remove generated output (.work-dir/site/public/)
+just import-til-drafts  # Scan ~/dev and ~/dotfiles docs/tils and move matches to .work-dir/drafts
 ```
 
 ## Project Overview
