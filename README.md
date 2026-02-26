@@ -5,13 +5,14 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**33 TILs** across **10 topics**
+**35 TILs** across **10 topics**
 
 
 ### Beads
 
 - [Beads `bd query` defaults to 50 results](beads/beads-query-default-limit.md)
 - [Beads has a dedicated `query` subcommand](beads/beads-query-subcommand.md)
+- [Short way to set a Beads task in progress](beads/short-way-to-set-a-beads-task-in-progress.md)
 
 ### Ghostty
 
@@ -59,6 +60,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Opencode
 
+- [Opencode Web Access Lan Access](opencode/opencode-web-access-lan-access.md)
 - [Opencode Disable Claude Code Compatibility](opencode/opencode-disable-claude-code-integration.md)
 - [Opencode Filtering Models](opencode/filtering-models.md)
 
