@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**35 TILs** across **10 topics**
+**39 TILs** across **12 topics**
 
 
 ### Beads
@@ -17,6 +17,15 @@ A collection of concise write-ups on small things I learn day to day.
 ### Ghostty
 
 - [Fix Broken Shift Enter In Ghostty when using Claude Code](ghostty/fix-broken-shift-enter-in-claude-code.md)
+
+### Git
+
+- [Negative Ignore In Git](git/negative-ignore-in-git.md)
+
+### Github
+
+- [Enable a GitHub Pages project site from `main` + `/docs`](github/enable-github-pages-project-site-from-main-docs.md)
+- [GitHub: serve pure static content without Jekyll](github/github-pages-nojekyll-for-docs-source.md)
 
 ### Homebrew
 
@@ -54,6 +63,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Nix
 
+- [Fix `Did you mean devShell?` by exporting `devShells.default`](nix/nix-develop-devshells-default-fix.md)
 - [Declarative npm Wrappers in Nix](nix/declarative-npm-wrappers-in-nix.md)
 - [Reporting Home Manager Package Changes During Updates](nix/reporting-changes-done-by-homemanager-update.md)
 - [Setup nix-direnv To Significantly Improve Performance](nix/setup-nix-direnv-to-significantly-improve-performance.md)
