@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**39 TILs** across **12 topics**
+**40 TILs** across **13 topics**
 
 
 ### Beads
@@ -13,6 +13,10 @@ A collection of concise write-ups on small things I learn day to day.
 - [Beads `bd query` defaults to 50 results](beads/beads-query-default-limit.md)
 - [Beads has a dedicated `query` subcommand](beads/beads-query-subcommand.md)
 - [Short way to set a Beads task in progress](beads/short-way-to-set-a-beads-task-in-progress.md)
+
+### Fish
+
+- [Fish Shell Completion For Custom Commands](fish/fish-shell-completion-for-custom-commands.md)
 
 ### Ghostty
 

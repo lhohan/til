@@ -1,6 +1,7 @@
 # Build artifacts
 .work-dir/site/public/
 .work-dir/site/content/
+.work-dir/scripts/__pycache__/
 !.work-dir/site/content/search/
 
 # Python
