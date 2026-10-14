@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**40 TILs** across **12 topics**
+**41 TILs** across **12 topics**
 
 
 ### Beads
@@ -52,6 +52,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Llm
 
+- [`/compact` Accepts Instructions](llm/compact-accepts-instructions.md)
 - [Opencode Filtering Models](llm/opencode-filtering-models.md)
 - [Install And Manage CLI Agents Using Nix Home Manager](llm/install-and-manage-cli-agents-using-nix-home-manager.md)
 - [Claude Code Web On A New Repo Sets Default Branch Not To Main](llm/claude-code-web-on-a-new-repo-sets-default-branch-not-to-main.md)
