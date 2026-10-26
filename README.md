@@ -5,7 +5,7 @@ A collection of concise write-ups on small things I learn day to day.
 `Search these TILs at https://til.hanlho.com/. Atom feed [here](https://til.hanlho.com/atom.xml).
 
 <!-- TOC START -->
-**42 TILs** across **13 topics**
+**43 TILs** across **13 topics**
 
 
 ### Beads
@@ -38,6 +38,7 @@ A collection of concise write-ups on small things I learn day to day.
 
 ### Jujutsu
 
+- [Excluding Paths From Commit](jujutsu/excluding-paths-from-commit.md)
 - [`bookmark advance` Instead Of `tug` Aliases](jujutsu/bookmark-advance-instead-of-tug-aliases.md)
 - [Fixing Missing Author or Committer on a Commit](jujutsu/fixing-missing-author-committer.md)
 - [Ignoring A Tracked File](jujutsu/ignoring-a-tracked-file.md)
