@@ -2,7 +2,7 @@
 
 Many coding agents provide a `/compact` command to summarise the conversation and free context space. The command can also accept instructions about what to preserve:
 
-```text
+`{3}txt
 /compact Only keep the plan location and outcome we decided on.
 ```
 

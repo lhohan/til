@@ -2,7 +2,7 @@
 
 CI failed with:
 
-```text
+`{3}txt
 error: flake '...' does not provide attribute 'devShells.x86_64-linux.default' or 'packages.x86_64-linux.default'
        Did you mean devShell?
 ```

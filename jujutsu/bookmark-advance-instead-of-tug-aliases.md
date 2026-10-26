@@ -39,7 +39,7 @@ jj config get revsets.bookmark-advance-to
 
 Should output:
 
-```text
+`{3}txt
 heads(::to & bookmarks())
 @-
 ```

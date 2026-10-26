@@ -4,7 +4,7 @@ Homebrew provides declarative package management through the `brew bundle` comma
 
 If a `Brewfile` contains packages:
 
-```text
+`{3}txt
 cask "firefox"
 cask "ghostty"
 cask "proton-mail"

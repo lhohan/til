@@ -8,7 +8,7 @@ bd update --claim <id>
 
 Note: `--claim` fails if the task is already assigned to someone else.
 
-```text
+`{3}txt
 Atomically claim the issue (sets assignee to you, status to in_progress; fails if already claimed)
 ```
 

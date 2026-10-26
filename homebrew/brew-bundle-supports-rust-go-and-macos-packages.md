@@ -2,7 +2,7 @@
 
 You can [declare your brew packages using a Brewfile](declarative-package-management-with-homebrew).Beyond taps and casks, Brewfile also supports managing Rust packages, Go packages, and macOS App Store applications.
 
-```text
+`{3}txt
 # Taps (repositories)
 tap "homebrew/cask-fonts"
 
